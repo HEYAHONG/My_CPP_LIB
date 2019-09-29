@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1569739928 source:c:\users\administrator\codeblocks_project\thread_cpp\c_thread.cpp
+	"c_thread.h"
+
+1569738800 c:\users\administrator\codeblocks_project\thread_cpp\c_thread.h
+	"pthread.h"
+	"vector"
+
+1569737508 source:c:\users\administrator\codeblocks_project\thread_cpp\main.cpp
+	"c_thread.h"
+	"stdio.h"
+
