@@ -1,0 +1,25 @@
+# depslib dependency file v1.0
+1569724349 source:c:\users\administrator\codeblocks_project\debug\debug.cpp
+	"debug.h"
+
+1569724338 c:\users\administrator\codeblocks_project\debug\debug.h
+	"stdio.h"
+	"stdint.h"
+
+1569724388 source:c:\users\administrator\codeblocks_project\debug\main.cpp
+	"debug.h"
+	"stdio.h"
+	"stdlib.h"
+
+1569724410 source:c:\users\administrator\codeblocks_project\hyh_learn_cpp\debug\main.cpp
+	"debug.h"
+	"stdio.h"
+	"stdlib.h"
+
+1569724618 c:\users\administrator\codeblocks_project\hyh_learn_cpp\debug\debug.h
+	"stdio.h"
+	"stdint.h"
+
+1569724591 source:c:\users\administrator\codeblocks_project\hyh_learn_cpp\debug\debug.cpp
+	"debug.h"
+
