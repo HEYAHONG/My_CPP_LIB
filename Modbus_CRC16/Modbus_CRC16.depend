@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1569378053 source:c:\users\administrator\codeblocks_project\modbus_crc16\modbus_crc16.c
+	"Modbus_CRC16.h"
+
+1569378734 c:\users\administrator\codeblocks_project\modbus_crc16\modbus_crc16.h
+	"stdint.h"
+
+1569378329 source:c:\users\administrator\codeblocks_project\modbus_crc16\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Modbus_CRC16.h"
+

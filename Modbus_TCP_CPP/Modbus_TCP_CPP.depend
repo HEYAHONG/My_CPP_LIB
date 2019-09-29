@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1569300156 source:c:\users\administrator\codeblocks_project\modbus_tcp_cpp\main.cpp
+	<iostream>
+	"modbus_tcp.h"
+
+1569300120 source:c:\users\administrator\codeblocks_project\modbus_tcp_cpp\modbus_tcp.cpp
+	"modbus_tcp.h"
+	"stdio.h"
+
+1569300035 c:\users\administrator\codeblocks_project\modbus_tcp_cpp\modbus_tcp.h
+	<iostream>
+	<string>
+	<vector>
+	"stdint.h"
+	"pthread.h"
+	<stdio.h>
+	<unistd.h>
+	<stdlib.h>
+	<errno.h>
+	"modbus/modbus.h"
+	"modbus/modbus-tcp.h"
+
