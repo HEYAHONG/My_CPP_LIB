@@ -1,0 +1,49 @@
+# depslib dependency file v1.0
+1569832217 source:c:\users\administrator\codeblocks_project\socket_cpp\main.cpp
+	"stdio.h"
+	"c_socket.h"
+
+1569832971 source:c:\users\administrator\codeblocks_project\socket_cpp\c_socket.cpp
+	"c_socket.h"
+
+1569829833 c:\users\administrator\codeblocks_project\socket_cpp\c_socket.h
+	"string.h"
+	"stdlib.h"
+	"stdio.h"
+	"unistd.h"
+	"errno.h"
+	<WS2tcpip.h>
+	<winsock2.h>
+	<sys/socket.h>
+	<sys/types.h>
+	<unistd.h>
+	<errno.h>
+	<netinet/in.h>
+	<netdb.h>
+	<arpa/inet.h>
+
+1569841871 source:e:\codeblocks_project\socket_cpp.0.0.1\c_socket.cpp
+	"c_socket.h"
+
+1569841644 e:\codeblocks_project\socket_cpp.0.0.1\c_socket.h
+	"string.h"
+	"stdlib.h"
+	"stdio.h"
+	"errno.h"
+	<unistd.h>
+	<signal.h>
+	<sys/types.h>
+	<WS2tcpip.h>
+	<winsock2.h>
+	<sys/socket.h>
+	<sys/types.h>
+	<unistd.h>
+	<errno.h>
+	<netinet/in.h>
+	<netdb.h>
+	<arpa/inet.h>
+
+1569840822 source:e:\codeblocks_project\socket_cpp.0.0.1\main.cpp
+	"stdio.h"
+	"c_socket.h"
+
