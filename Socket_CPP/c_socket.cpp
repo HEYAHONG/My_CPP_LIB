@@ -16,13 +16,23 @@ C_Socket::C_Socket()
         #endif // WIN32
     }
     class_count++;
+    set_Is_IPV6(false);
     //ctor
 }
 
 C_Socket::Addr * C_Socket::socket_new(int type,int protocal)
 {
-    Addr * p=new Addr;
-    p->fd=socket(AF_INET,type,protocal);
+    Addr * p=NULL;
+    if(Is_IPV6)
+    {
+        p=new Addr(Is_IPV6);
+        p->fd=socket(AF_INET6,type,protocal);
+    }
+    else
+    {
+        p=new Addr(Is_IPV6);
+        p->fd=socket(AF_INET,type,protocal);
+    }
     if(p->fd < 0)
     {
         delete p;
@@ -43,24 +53,34 @@ void C_Socket::socket_delete(C_Socket::Addr * p)
         delete p;
     }
 }
-void C_Socket::socket_setaddr(C_Socket::Addr *p,unsigned long addr,unsigned short port)
-{
-    if(p!=NULL)
-    {
-        p->sockaddr->sin_family=AF_INET;
-        p->sockaddr->sin_addr.s_addr=htonl(addr);
-        p->sockaddr->sin_port=htons(port);
-        p->tp=Addr::Addr_ad_Initiated;
-    }
-}
+//void C_Socket::socket_setaddr(C_Socket::Addr *p,unsigned long addr,unsigned short port)
+//{
+//    if(p!=NULL)
+//    {
+//        p->sockaddr->sin_family=AF_INET;
+//        p->sockaddr->sin_addr.s_addr=htonl(addr);
+//        p->sockaddr->sin_port=htons(port);
+//        p->tp=Addr::Addr_ad_Initiated;
+//    }
+//}
 void C_Socket::socket_setaddr(C_Socket::Addr *p,const char *addr,unsigned short port)
 {
     if(p!=NULL)
     {
+        if(Is_IPV6)
+        {
+        p->sockaddr6->sin6_family=AF_INET6;
+        p->sockaddr6->sin6_port=htons(port);
+        inet_pton(AF_INET6,addr,&(p->sockaddr6->sin6_addr));
+        p->tp=Addr::Addr_ad_Initiated;
+        }
+        else
+        {
         p->sockaddr->sin_family=AF_INET;
         p->sockaddr->sin_port=htons(port);
         p->sockaddr->sin_addr.s_addr=inet_addr(addr);
         p->tp=Addr::Addr_ad_Initiated;
+        }
 
     }
 }
@@ -69,7 +89,10 @@ int C_Socket::socket_bind(C_Socket::Addr *p)
     int ret;
     if(p == NULL)
         return -1;
-    ret=bind(p->fd,(struct sockaddr*)p->sockaddr,sizeof(struct sockaddr));
+    if(Is_IPV6)
+        ret=bind(p->fd,(struct sockaddr*)p->sockaddr6,sizeof(Addr::sockaddr_in_t6));
+    else
+        ret=bind(p->fd,(struct sockaddr*)p->sockaddr,sizeof(Addr::sockaddr_in_t));
     //printf("%d:%s",errno,strerror(errno));
     if(ret == 0)
     {
@@ -92,10 +115,22 @@ C_Socket::Addr * C_Socket::socket_accept(C_Socket::Addr *p)
         return NULL;
     if(p->tp != Addr::Addr_Server)
         return NULL;
-    Addr * client=new Addr;
-    int ret=sizeof(struct sockaddr);
+    Addr * client=NULL;
+    int ret=0;
+    if(Is_IPV6)
+    {
+    client=new Addr(Is_IPV6);
+    ret=sizeof(Addr::sockaddr_in_t6);
+    memcpy(client->sockaddr6,p->sockaddr6,p->sockaddr_size);
+    client->fd=accept(p->fd,(struct sockaddr *)client->sockaddr6,&ret);
+    }
+    else
+    {
+    client=new Addr(Is_IPV6);
+    ret=sizeof(Addr::sockaddr_in_t);
     memcpy(client->sockaddr,p->sockaddr,p->sockaddr_size);
     client->fd=accept(p->fd,(struct sockaddr *)client->sockaddr,&ret);
+    }
     if(client->fd < 0)
     {
         delete client;
@@ -113,7 +148,10 @@ int  C_Socket::socket_connect(C_Socket::Addr *p)
     int ret;
     if(p == NULL)
         return -1;
-    ret=connect(p->fd,(struct sockaddr *)p->sockaddr,p->sockaddr_size);
+    if(Is_IPV6)
+        ret=connect(p->fd,(struct sockaddr *)p->sockaddr6,p->sockaddr_size);
+    else
+        ret=connect(p->fd,(struct sockaddr *)p->sockaddr,p->sockaddr_size);
     if(ret == 0)
     {
         p->tp=Addr::Addr_To_Server;
@@ -149,7 +187,12 @@ void   C_Socket::socket_server(const char * ip_addr,unsigned short ip_port,int l
     if(server == NULL)
         return;
     if(ip_addr==NULL)
-        socket_setaddr(server,(unsigned long)0,ip_port);
+        {
+        if(Is_IPV6)
+            socket_setaddr(server,"::",ip_port);
+        else
+            socket_setaddr(server,"0.0.0.0",ip_port);
+        }
     else
         socket_setaddr(server,ip_addr,ip_port);
     if(socket_bind(server))
@@ -213,7 +256,12 @@ void   C_Socket::socket_client(const char * ip_addr,unsigned short ip_port,int s
     if(server == NULL)
         return;
     if(ip_addr==NULL)
-        socket_setaddr(server,(unsigned long)0,ip_port);
+        {
+        if(Is_IPV6)
+            socket_setaddr(server,"::",ip_port);
+        else
+            socket_setaddr(server,"0.0.0.0",ip_port);
+        }
     else
         socket_setaddr(server,ip_addr,ip_port);
 

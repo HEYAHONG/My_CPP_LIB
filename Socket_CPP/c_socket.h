@@ -48,20 +48,39 @@ class C_Socket
             Addr_To_Server
             };
             typedef struct sockaddr_in sockaddr_in_t;
+            typedef struct sockaddr_in6 sockaddr_in_t6;
             int fd;//文件标识
             int tp;//地址状态
             sockaddr_in_t *sockaddr;
+            sockaddr_in_t6 *sockaddr6;
             size_t         sockaddr_size;
-            Addr()
+            bool Is_IPV6;
+            Addr(bool is_ipv6=false)
             {
-                sockaddr=new sockaddr_in_t;
-                sockaddr_size=sizeof(sockaddr_in_t);
-                memset(sockaddr,0,sockaddr_size);
-                tp=Addr_Uninitiated;
+                Is_IPV6=is_ipv6;
+                if(!is_ipv6)
+                {
+                    sockaddr=new sockaddr_in_t;
+                    sockaddr_size=sizeof(sockaddr_in_t);
+                    memset(sockaddr,0,sockaddr_size);
+                    tp=Addr_Uninitiated;
+                    sockaddr6=NULL;
+                }
+                else
+                {
+                    sockaddr6=new sockaddr_in_t6;
+                    sockaddr_size=sizeof(sockaddr_in_t6);
+                    memset(sockaddr6,0,sockaddr_size);
+                    tp=Addr_Uninitiated;
+                    sockaddr=NULL;
+                }
             }
             ~Addr()
             {
-                delete sockaddr;
+                if(sockaddr!=NULL)
+                    delete sockaddr;
+                if(sockaddr6!=NULL)
+                    delete sockaddr6;
             }
 
 
@@ -72,11 +91,21 @@ class C_Socket
         unsigned long ip_default;
         unsigned short port_default;
 
+        //设定是否为ipv6，一般在构造函数中调用
+        bool Is_IPV6;
+        virtual void set_Is_IPV6(bool is_ipv6)
+        {
+            Is_IPV6=is_ipv6;
+        }
+        virtual bool get_Is_IPV6()
+        {
+            return Is_IPV6;
+        }
 
         //封装socket函数
         virtual Addr * socket_new(int type=SOCK_STREAM,int protocol=0);
         virtual void   socket_delete(Addr *p);
-        virtual void   socket_setaddr(Addr *p,unsigned long addr=INADDR_ANY,unsigned short port=5000);
+//        virtual void   socket_setaddr(Addr *p,unsigned long addr=INADDR_ANY,unsigned short port=5000);
         virtual void   socket_setaddr(Addr *p,const char * addr,unsigned short port=5000);
         virtual int    socket_bind(Addr *p);
         virtual int    socket_listen(Addr *p,int backlog=2);

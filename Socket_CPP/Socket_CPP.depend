@@ -22,10 +22,10 @@
 	<netdb.h>
 	<arpa/inet.h>
 
-1569841871 source:e:\codeblocks_project\socket_cpp.0.0.1\c_socket.cpp
+1569948748 source:e:\codeblocks_project\socket_cpp.0.0.1\c_socket.cpp
 	"c_socket.h"
 
-1569841644 e:\codeblocks_project\socket_cpp.0.0.1\c_socket.h
+1569949283 e:\codeblocks_project\socket_cpp.0.0.1\c_socket.h
 	"string.h"
 	"stdlib.h"
 	"stdio.h"
@@ -43,7 +43,7 @@
 	<netdb.h>
 	<arpa/inet.h>
 
-1569840822 source:e:\codeblocks_project\socket_cpp.0.0.1\main.cpp
+1569949331 source:e:\codeblocks_project\socket_cpp.0.0.1\main.cpp
 	"stdio.h"
 	"c_socket.h"
 

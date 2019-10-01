@@ -7,4 +7,5 @@
 Codeblocks+MSYS MinGW32 GCC
 ____________
 备注:
-仅在windows10上测试了TCP连接。
+1.仅在windows10上测试了TCP连接。
+2.增加对IPV6的支持，但若要使用IPV6必须在启动服务器或客户端之前将状态设定好，运行中改变状态将出现错误。

@@ -38,14 +38,16 @@ int main(int argc,char *argv[])
     {
     printf("Start Server!\n");
     test_server temp;
-    temp.socket_server("0.0.0.0",5000);
+    temp.set_Is_IPV6(true);
+    temp.socket_server("::",5000);
     }
     if(c=='C' || c== 'c')
     {
     printf("Start Client!\n");
     test_client temp;
+    temp.set_Is_IPV6(true);
     char buff[4096];
-    temp.socket_client("127.0.0.1",5000);
+    temp.socket_client("::1",5000);
     while(1)
     {
         if(temp.client !=NULL)
