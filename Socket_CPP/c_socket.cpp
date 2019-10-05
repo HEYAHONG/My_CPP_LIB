@@ -116,7 +116,11 @@ C_Socket::Addr * C_Socket::socket_accept(C_Socket::Addr *p)
     if(p->tp != Addr::Addr_Server)
         return NULL;
     Addr * client=NULL;
+    #ifdef WIN32
     int ret=0;
+    #else
+    unsigned int ret=0;
+    #endif // WIN32
     if(Is_IPV6)
     {
     client=new Addr(Is_IPV6);
