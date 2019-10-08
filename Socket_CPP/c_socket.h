@@ -115,13 +115,30 @@ class C_Socket
         virtual int    socket_write(Addr *p,void *buff,size_t count);
 
         //服务器自定义函数
+        enum Server_Error
+        {
+            Server_Socket_Error=1,
+            Server_Bind_Error,
+            Server_Listen_Error,
+            Server_Accept_Error,
+            Server_Read_Error
+
+        };
         virtual void   socket_server(const char * ip_addr=NULL,unsigned short ip_port=5000,int listen_backlog=2,int socket_type=SOCK_STREAM,int socket_protocol=0);
         virtual void   socket_server_OnAccept(Addr *p);
+        virtual void   socket_server_OnError(int Server_Error);
         virtual void   socket_server_OnReceiveData(Addr *p,void * buff,size_t count);
 
         //客户端自定义函数
+        enum Client_Error
+        {
+            Client_Socket_Error=1,
+            Client_Connect_Error
+        };
         virtual void   socket_client(const char * ip_addr,unsigned short ip_port=5000,int socket_type=SOCK_STREAM,int socket_protocol=0);
         virtual void   socket_client_OnConnected(Addr *p);
+        virtual void   socket_client_OnError(int Client_Error);
+
 
 
     protected:

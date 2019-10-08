@@ -189,7 +189,10 @@ void   C_Socket::socket_server(const char * ip_addr,unsigned short ip_port,int l
 {
     Addr * server = socket_new(socket_type,socket_protocol);
     if(server == NULL)
+    {
+        socket_server_OnError(Server_Socket_Error);
         return;
+    }
     if(ip_addr==NULL)
         {
         if(Is_IPV6)
@@ -202,11 +205,13 @@ void   C_Socket::socket_server(const char * ip_addr,unsigned short ip_port,int l
     if(socket_bind(server))
         {
             socket_delete(server);
+            socket_server_OnError(Server_Bind_Error);
             return;
         }
     if(socket_listen(server,listen_backlog))
         {
             socket_delete(server);
+            socket_server_OnError(Server_Listen_Error);
             return;
         }
     Addr * client=NULL;
@@ -216,11 +221,18 @@ void   C_Socket::socket_server(const char * ip_addr,unsigned short ip_port,int l
         if(client == NULL)
             {
             socket_delete(server);
+            socket_server_OnError(Server_Accept_Error);
             return;
             }
         socket_server_OnAccept(client);
 
     }
+}
+
+void C_Socket::socket_server_OnError(int Server_Error)
+{
+
+    return;
 }
 
 void C_Socket::socket_server_OnAccept(C_Socket::Addr * p)
@@ -241,6 +253,7 @@ void C_Socket::socket_server_OnAccept(C_Socket::Addr * p)
         }
         else
         {
+            socket_server_OnError(Server_Read_Error);
             break;
         }
     }
@@ -258,7 +271,10 @@ void   C_Socket::socket_client(const char * ip_addr,unsigned short ip_port,int s
 {
     Addr * server = socket_new(socket_type,socket_protocol);
     if(server == NULL)
+    {
+        socket_client_OnError(Client_Socket_Error);
         return;
+    }
     if(ip_addr==NULL)
         {
         if(Is_IPV6)
@@ -272,6 +288,7 @@ void   C_Socket::socket_client(const char * ip_addr,unsigned short ip_port,int s
     if(socket_connect(server))
     {
        socket_delete(server);
+       socket_client_OnError(Client_Connect_Error);
         return;
     }
     socket_client_OnConnected(server);
@@ -279,6 +296,11 @@ void   C_Socket::socket_client(const char * ip_addr,unsigned short ip_port,int s
 void  C_Socket::socket_client_OnConnected(Addr *p)
 {
     //”√”⁄÷ÿ‘ÿ
+    return;
+}
+
+void C_Socket::socket_client_OnError(int Client_Error)
+{
     return;
 }
 

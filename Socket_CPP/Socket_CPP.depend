@@ -1,17 +1,19 @@
 # depslib dependency file v1.0
-1569832217 source:c:\users\administrator\codeblocks_project\socket_cpp\main.cpp
+1570498367 source:c:\users\administrator\codeblocks_project\socket_cpp\main.cpp
 	"stdio.h"
 	"c_socket.h"
 
-1569832971 source:c:\users\administrator\codeblocks_project\socket_cpp\c_socket.cpp
+1570502956 source:c:\users\administrator\codeblocks_project\socket_cpp\c_socket.cpp
 	"c_socket.h"
 
-1569829833 c:\users\administrator\codeblocks_project\socket_cpp\c_socket.h
+1570502816 c:\users\administrator\codeblocks_project\socket_cpp\c_socket.h
 	"string.h"
 	"stdlib.h"
 	"stdio.h"
-	"unistd.h"
 	"errno.h"
+	<unistd.h>
+	<signal.h>
+	<sys/types.h>
 	<WS2tcpip.h>
 	<winsock2.h>
 	<sys/socket.h>
