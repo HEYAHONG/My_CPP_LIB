@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1570604730 source:c:\users\administrator\codeblocks_project\sqlite3_cpp\main.cpp
+	"c_sqlite3.h"
+	"stdio.h"
+
+1570604325 c:\users\administrator\codeblocks_project\sqlite3_cpp\c_sqlite3.h
+	"iostream"
+	"vector"
+	"string.h"
+	"sqlite3.h"
+
+1570604349 source:c:\users\administrator\codeblocks_project\sqlite3_cpp\c_sqlite3.cpp
+	"c_sqlite3.h"
+
