@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1570868288 source:c:\users\administrator\codeblocks_project\windows_anonymous_pipe_cpp\main.cpp
+	"stdio.h"
+	"wapipe.h"
+
+1570868006 source:c:\users\administrator\codeblocks_project\windows_anonymous_pipe_cpp\wapipe.cpp
+	"wapipe.h"
+
+1570867259 c:\users\administrator\codeblocks_project\windows_anonymous_pipe_cpp\wapipe.h
+	"windows.h"
+	"iostream"
+
