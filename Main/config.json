@@ -1,0 +1,6 @@
+{
+	"Query_String_Prefix" : "http://47.106.72.188:8087/node/diapi/node3rd/get_ip_port?mac=111221",
+	"modbus_bind_address" : "0.0.0.0"
+	"modbus_bind_port"	  :  1502
+	
+}

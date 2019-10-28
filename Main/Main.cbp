@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Main" />
+		<Option pch_mode="2" />
+		<Option compiler="msys64_mingw32_gnu_gcc_compiler" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Main" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="msys_mingw32_gnu_gcc_compiler" />
+				<Option projectCompilerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-fPIC" />
+				</Compiler>
+				<Linker>
+					<Add option="-static-libstdc++" />
+					<Add option="-static-libgcc" />
+					<Add option="-static" />
+					<Add option="-lcurl.dll" />
+					<Add option="-lmodbus.dll" />
+					<Add option="-ljsoncpp.dll" />
+					<Add option="-luser32" />
+					<Add option="-lkernel32" />
+					<Add option="-lws2_32" />
+					<Add option="-lmysqlclient.dll" />
+				</Linker>
+				<MakeCommands>
+					<Build command="" />
+					<CompileFile command="" />
+					<Clean command="" />
+					<DistClean command="" />
+					<AskRebuildNeeded command="" />
+					<SilentBuild command=" &gt; $(CMD_NULL)" />
+				</MakeCommands>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Main" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="msys_mingw32_gnu_gcc_compiler" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-fPIC" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-static-libstdc++" />
+					<Add option="-static-libgcc" />
+					<Add option="-lcurl.dll" />
+					<Add option="-lmodbus.dll" />
+					<Add option="-ljsoncpp.dll" />
+					<Add option="-luser32" />
+					<Add option="-lws2_32" />
+					<Add option="-lkernel32" />
+					<Add option="-lmysqlclient.dll" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Linker>
+		</Linker>
+		<Unit filename="cURL_download.cpp" />
+		<Unit filename="cURL_download.h" />
+		<Unit filename="json_config.cpp" />
+		<Unit filename="json_config.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="modbus_server.cpp" />
+		<Unit filename="modbus_server.h" />
+		<Unit filename="mysql_client.cpp" />
+		<Unit filename="mysql_client.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="0" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

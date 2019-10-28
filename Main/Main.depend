@@ -1,0 +1,72 @@
+# depslib dependency file v1.0
+1569305421 source:c:\users\administrator\codeblocks_project\main\main.cpp
+	"iostream"
+	"curl/curl.h"
+	"json/json.h"
+	"pthread.h"
+	"cURL_download.h"
+	"json_config.h"
+	"modbus_server.h"
+	"mysql_client.h"
+	"windows.h"
+
+1568873121 c:\users\administrator\codeblocks_project\main\curl_download.h
+	"iostream"
+	"curl/curl.h"
+
+1568872925 source:c:\users\administrator\codeblocks_project\main\curl_download.cpp
+	"cURL_download.h"
+
+1568864475 source:c:\users\administrator\codeblocks_project\main\json_config.cpp
+	"json_config.h"
+
+1568863864 c:\users\administrator\codeblocks_project\main\json_config.h
+	"iostream"
+	"json/json.h"
+	<fstream>
+
+1568869204 source:c:\users\administrator\codeblocks_project\main\modbus_server.cpp
+	"modbus_server.h"
+
+1568858275 c:\users\administrator\codeblocks_project\main\modbus_server.h
+	"iostream"
+	"stdint.h"
+	"pthread.h"
+	<stdio.h>
+	<unistd.h>
+	<stdlib.h>
+	<errno.h>
+	"modbus/modbus.h"
+
+1568954883 source:c:\users\administrator\codeblocks_project\main\mysql_client.cpp
+	"mysql_client.h"
+
+1568954825 c:\users\administrator\codeblocks_project\main\mysql_client.h
+	"stdint.h"
+	"stdio.h"
+	"iostream"
+	"vector"
+	"cstring"
+	"mysql/mysql.h"
+
+1567976550 d:\mariadb-10.4.8-win32\include\mysql\mysql.h
+	<stdarg.h>
+	<sys/types.h>
+	"mariadb_com.h"
+	"mariadb_version.h"
+	"ma_list.h"
+	"mariadb_ctype.h"
+	"mariadb_stmt.h"
+
+1567976550 d:\mariadb-10.4.8-win32\include\mysql\mariadb_com.h
+
+1567984782 d:\mariadb-10.4.8-win32\include\mysql\mariadb_version.h
+	<custom_conf.h>
+
+1567976550 d:\mariadb-10.4.8-win32\include\mysql\ma_list.h
+
+1567976550 d:\mariadb-10.4.8-win32\include\mysql\mariadb_ctype.h
+	<ctype.h>
+
+1567976550 d:\mariadb-10.4.8-win32\include\mysql\mariadb_stmt.h
+
