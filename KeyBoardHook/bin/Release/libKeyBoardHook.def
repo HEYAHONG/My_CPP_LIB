@@ -1,0 +1,6 @@
+EXPORTS
+    KB_fun @1 DATA
+    KeyBoardHookProc@12 @2
+    MessageThread@4 @3
+    g_hHook @4 DATA
+    install_KB_hook @5

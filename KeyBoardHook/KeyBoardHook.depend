@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1514140580 source:c:\users\administrator\codeblocks_project\keyboardhook\main.c
+
+1572591381 source:c:\users\administrator\codeblocks_project\keyboardhook\keyboardhook.c
+	"KeyBoardHook.h"
+
+1572591625 c:\users\administrator\codeblocks_project\keyboardhook\keyboardhook.h
+	"windows.h"
+	"stdio.h"
+
+1572591604 source:c:\users\administrator\codeblocks_project\keyboardhook\test.c
+	"stdio.h"
+	"KeyBoardHook.H"
+
