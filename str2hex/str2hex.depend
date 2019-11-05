@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1572943259 source:c:\users\administrator\codeblocks_project\str2hex\main.cpp
+	<stdio.h>
+	<string.h>
+
