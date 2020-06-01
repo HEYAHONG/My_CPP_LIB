@@ -29,7 +29,7 @@ class DataStore
             } Data_Type;
 
 
-            //释放指针，不会调用析构函数,因此只能使用无需析构的类型
+            //释放指针，默认不会调用析构函数,因此只能使用无需析构的类型
             void FreePtr()
             {
                 mulock.lock();
@@ -65,6 +65,9 @@ class DataStore
             Data(const class Data &other)
             {
                 //FreePtr();
+                p=NULL;
+                p_size=0;
+
                 if(other.p_size!=0)
                 {
                     mulock.lock();
@@ -277,6 +280,24 @@ class DataStore
             return ret;
         }
 
+        //从数据引索判断是否存在某数据
+        bool exist(DataIndex _index)
+        {
+            bool ret=false;
+            mulock.lock();
+            for(size_t i=0;i<ArrayIndex.size();i++)
+            {
+                if(strcmp(ArrayIndex[i].indexstr.c_str(),_index.indexstr.c_str())==0)
+                {
+
+                    ret=true;
+                    break;
+                }
+            }
+            mulock.unlock();
+            return ret;
+        }
+
         void remove(size_t index)//删除引索为index的值
         {
             mulock.lock();
@@ -287,7 +308,7 @@ class DataStore
             Array.erase(Array.begin()+index);
             mulock.unlock();
         }
-        bool remove(DataIndex _index)
+        bool remove(DataIndex _index)//删除引索为_index的值
         {
             int index=-1;
             bool ret=false;
