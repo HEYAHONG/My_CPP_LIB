@@ -22,13 +22,13 @@ int main()
 
     cout<<"测试数据读取，需要加强制转换才能读取"<<endl;
 
-    cout<<"i="<<(int)DS[0]<<endl;
-    cout<<"j="<<(size_t)DS[1]<<endl;
-    cout<<"k="<<(double)DS[2]<<endl;
+    cout<<"i="<<(int)DS[0]<<"\ttype:"<<DS[0].GetTypeStr()<<endl;
+    cout<<"j="<<(size_t)DS[1]<<"\ttype:"<<DS[1].GetTypeStr()<<endl;
+    cout<<"k="<<(double)DS[2]<<"\ttype:"<<DS[2].GetTypeStr()<<endl;
 
-    cout<<"l="<<*(std::string *)DS[3]<<endl;
+    cout<<"l="<<*(std::string *)DS[3]<<"\ttype:"<<DS[3].GetTypeStr()<<endl;
 
-    cout<<"l="<<DS[4].ToStdString()<<endl;
+    cout<<"l="<<DS[4].ToStdString()<<"\ttype:"<<DS[4].GetTypeStr()<<endl;
 
     cout<<"-----------------------------------"<<endl;
 
@@ -61,8 +61,8 @@ int main()
     cout<<"测试利用字符下标删除"<<endl;
     DS.remove("PI=");
 
-    //由于已删除数据，下一语句无法正确执行
-    //cout<<"PI="<<(long double)DS["PI="]<<endl;
+    //由于已删除数据
+    cout<<"PI="<<(DS.exist("PI=")?(std::to_string((long double)DS["PI="])):(std::string("已删除")))<<endl;
 
     return 0;
 }

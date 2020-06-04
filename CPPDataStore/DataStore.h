@@ -3,6 +3,7 @@
 
 //使用C++14编写
 
+
 #include "vector"
 #include "assert.h"
 #include "mutex"
@@ -19,14 +20,17 @@ class DataStore
             void *p;
             size_t p_size;
             std::mutex mulock;
-
-            public:
-
+            std::string typestr;//获取初始化时的类型名
             enum
             {
                 Data_Type_Default=0,
                 Data_Type_StdString=1
             } Data_Type;
+
+
+            public:
+
+
 
 
             //释放指针，默认不会调用析构函数,因此只能使用无需析构的类型
@@ -55,41 +59,92 @@ class DataStore
               p=NULL;
               p_size=0;
               Data_Type=Data_Type_Default;
+              typestr="";
             };
             //析构函数
             ~Data()
             {
                FreePtr();
             }
+
+            std::string GetTypeStr()
+            {//获取类型字符串
+                return typestr;
+            }
+
             //复制构造函数
             Data(const class Data &other)
             {
                 //FreePtr();
                 p=NULL;
                 p_size=0;
+                Data_Type=other.Data_Type;
 
                 if(other.p_size!=0)
                 {
-                    mulock.lock();
-                    p=new uint8_t[other.p_size];
-                    p_size=other.p_size;
-                    memcpy(p,other.p,p_size);
-                    mulock.unlock();
+                    switch(other.Data_Type)
+                    {
+                    default:
+                            mulock.lock();
+
+                            p=new uint8_t[other.p_size];
+                            p_size=other.p_size;
+                            memcpy(p,other.p,p_size);
+
+                            typestr=other.typestr;
+
+                            mulock.unlock();
+                            break;
+                    case Data_Type_StdString:
+                            mulock.lock();
+                            p=new std::string;
+                            (*((std::string *)p))=(*(std::string *)other.p);
+
+                            p_size=other.p_size;
+
+                            typestr=other.typestr;
+
+                            mulock.unlock();
+                            break;
+                    }
                 }
             }
             class Data & operator=(const class Data &other)
             {
                 FreePtr();
+                Data_Type=other.Data_Type;
                 if(other.p_size!=0)
                 {
-                    mulock.lock();
-                    p=new uint8_t[other.p_size];
-                    p_size=other.p_size;
-                    memcpy(p,other.p,p_size);
-                    mulock.unlock();
+                     switch(other.Data_Type)
+                    {
+                    default:
+                            mulock.lock();
+
+                            p=new uint8_t[other.p_size];
+                            p_size=other.p_size;
+                            memcpy(p,other.p,p_size);
+
+                            typestr=other.typestr;
+
+                            mulock.unlock();
+                            break;
+                    case Data_Type_StdString:
+                            mulock.lock();
+                            p=new std::string;
+                            (*((std::string *)p))=(*(std::string *)other.p);
+
+                            p_size=other.p_size;
+
+                            typestr=other.typestr;
+
+                            mulock.unlock();
+                            break;
+                    }
                 }
                 return *this;
             }
+
+
             //将其它类型的数存储在Data中，默认的存储方式,如是需要析构的类，单独写函数
             template <typename T> Data(const T & other)
             {
@@ -99,6 +154,9 @@ class DataStore
                 p_size=sizeof(T);
                 *((T*)p)=other;//复制
                 Data_Type=Data_Type_Default;
+
+
+
                 mulock.unlock();
             }
 
@@ -110,6 +168,9 @@ class DataStore
                 p_size=sizeof(T);
                 *((T*)p)=other;//复制
                 Data_Type=Data_Type_Default;
+
+
+
                 mulock.unlock();
                 return *this;
             }
@@ -124,6 +185,9 @@ class DataStore
                 assert(p_size>=sizeof(T));
 
                 ret=*((T*)p);
+
+
+
                 mulock.unlock();
                 return ret;
             }
@@ -137,6 +201,9 @@ class DataStore
                 p_size=sizeof(std::string);
                 *(std::string *)p=other;
                 Data_Type=Data_Type_StdString;
+
+                typestr="std::string";
+
                 mulock.unlock();
             }
 
@@ -148,6 +215,9 @@ class DataStore
                 p_size=sizeof(std::string);
                 *(std::string *)p=other;
                 Data_Type=Data_Type_StdString;
+
+                typestr="std::string";
+
                 mulock.unlock();
                 return *this;
             };

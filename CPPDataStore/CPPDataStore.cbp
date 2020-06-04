@@ -33,6 +33,7 @@
 			<Add option="-fexceptions" />
 			<Add option="-std=c++14" />
 		</Compiler>
+		<Unit filename="DataStore.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
