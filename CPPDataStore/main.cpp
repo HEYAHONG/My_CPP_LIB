@@ -13,11 +13,19 @@ int main()
     std::string l="Test";
 
     DS.append(i);//index为0
-    DS.append(j);//index为1
-    DS.append(k);//index为2
-    DS.append(&l);//index为3
-    DS.append(l);//index为4
+    DS[0].SetTypeStr("int");
 
+
+    DS.append(j);//index为1
+    DS[1].SetTypeStr("size_t");
+
+    DS.append(k);//index为2
+    DS[2].SetTypeStr("double");
+
+    DS.append(&l);//index为3
+    DS[3].SetTypeStr("std::string *");
+
+    DS.append(l);//index为4
 
 
     cout<<"测试数据读取，需要加强制转换才能读取"<<endl;

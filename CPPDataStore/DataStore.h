@@ -71,11 +71,22 @@ class DataStore
             {//获取类型字符串
                 return typestr;
             }
+            void SetTypeStr(std::string _typestr)
+            {
+                mulock.lock();
+                if(Data_Type==Data_Type_Default)
+                {//默认类型才允许设置类型字符
+                    typestr=_typestr;
+                }
+                mulock.unlock();
+            }
+
 
             //复制构造函数
             Data(const class Data &other)
             {
                 //FreePtr();
+                mulock.lock();
                 p=NULL;
                 p_size=0;
                 Data_Type=other.Data_Type;
@@ -85,7 +96,7 @@ class DataStore
                     switch(other.Data_Type)
                     {
                     default:
-                            mulock.lock();
+
 
                             p=new uint8_t[other.p_size];
                             p_size=other.p_size;
@@ -93,10 +104,10 @@ class DataStore
 
                             typestr=other.typestr;
 
-                            mulock.unlock();
+
                             break;
                     case Data_Type_StdString:
-                            mulock.lock();
+
                             p=new std::string;
                             (*((std::string *)p))=(*(std::string *)other.p);
 
@@ -104,21 +115,23 @@ class DataStore
 
                             typestr=other.typestr;
 
-                            mulock.unlock();
+
                             break;
                     }
                 }
+                mulock.unlock();
             }
             class Data & operator=(const class Data &other)
             {
                 FreePtr();
+                mulock.lock();
+
                 Data_Type=other.Data_Type;
                 if(other.p_size!=0)
                 {
                      switch(other.Data_Type)
                     {
                     default:
-                            mulock.lock();
 
                             p=new uint8_t[other.p_size];
                             p_size=other.p_size;
@@ -126,10 +139,10 @@ class DataStore
 
                             typestr=other.typestr;
 
-                            mulock.unlock();
+
                             break;
                     case Data_Type_StdString:
-                            mulock.lock();
+
                             p=new std::string;
                             (*((std::string *)p))=(*(std::string *)other.p);
 
@@ -137,10 +150,11 @@ class DataStore
 
                             typestr=other.typestr;
 
-                            mulock.unlock();
+
                             break;
                     }
                 }
+                mulock.unlock();
                 return *this;
             }
 
